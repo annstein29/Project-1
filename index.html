@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0/dist/css/foundation.min.css"
         integrity="sha256-VEEaOnBKVRoYPn4AID/tY/XKVxKEqXstoo/xZ6nemak= sha384-D46t32f421/hB30qwnim2pIcisNN5GU9+6m2Mfnd3dKpTSFidZLa08/1StEiCFId sha512-WkgzH8VKemDfwrp18r+wgbx+oHXOkfd2kJs7ocAXdGDgonXDXh88E90IRtRZRXtO0IHprxYHYlY14h+wyTsUDA=="
         crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 
     <link href="https://fonts.googleapis.com/css?family=Cantarell" rel="stylesheet">
     <!-- Compressed JavaScript -->
@@ -69,10 +69,42 @@
             </div>
             <!-- I need the h1 to change accordingly depending on what was clicked. -->
             <div id="movie-grid">
+                   
                 <!-- Jquery get us the movie posters! Need a place to put the poster images -->
+            
             </div>
         </div>
     </div>
+
+
+
+    <!-- This is the MODAL -->
+
+        <!-- <div class="columns">
+                  <h2>Reveal - No Overlay</h2>
+                  <p>A modal is just an empty container, so you can put any kind of content inside it, from text to forms to video to an entire grid.</p>
+                  <p>To remove the overlay, add the attribute <code>data-overlay="false"</code> to the modal.</p>
+                </div>
+              </div> -->
+
+              <div class="row" id = "display-movie">            
+                    <div class="row">
+                        <div class="columns">
+                            <p><a data-toggle="exampleModal9">Click me for an overlay-lacking modal</a></p>
+            
+                            <div class="reveal" id="exampleModal9" data-reveal data-overlay="false">
+                                <h2 id="firstModalTitle">This is a modal.</h2>
+                                <img src="https://image.tmdb.org/t/p/w300/tCBxnZwLiY1BOKw3tH6AxHZdqPh.jpg">;
+                                <p><a href="#" data-reveal-id="secondModal" class="secondary button">Second Modal...</a></p>
+                                <button class="close-button" data-close aria-label="Close reveal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
     <footer>
         <!-- <div class="row"></div> -->
@@ -86,9 +118,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/4.2.0/what-input.min.js" integrity="sha256-7wGy9IEPmo9Jk/I86siWbZFPeclfjFitAAfmvxBUc7k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
    -->
-<script>
-    $(document).foundation();
-</script>
-<script src="app.js"></script>
+   <script>$(document).foundation();</script>
+<script src="javascript/app.js"></script>
 
 </html>

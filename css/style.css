@@ -4,6 +4,11 @@ body {
     font-family: 'Cantarell', sans-serif;
 }
 
+#display-movie
+{
+    display: none;
+}
+
 .top-bar, .top-bar ul {
     background-color: #333;
     color: #fff;
