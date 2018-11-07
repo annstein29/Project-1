@@ -19,45 +19,19 @@ $(document).ready(function () {
 	}
 
 	$.ajax(settings).done(function (response) {
-	//	console.log(response);
+		//	console.log(response);
 		//	console.log(response.results[0].overview);
 		//var overview = response.results[0].overview;
 
 		for (i = 0; i < response.results.length; i++) {
-			//console.log(response.results[i].id);
-			//	document.getElementById('movie-grid').innerHTML += '<iframe width="753" height="380" src="https://www.youtube.com/embed/'+ response.results[i].key+ '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 
-			//console.log(imageBaseUrl + 'w300' + response.results[i].poster_path);
-
-			document.getElementById('movie-grid').innerHTML += '<img src="' + imageBaseUrl + 'w300' + response.results[i].poster_path + '" id = "' + response.results[i].id + '" onclick = "reveal(this.id)">';
+			document.getElementById('movie-grid').innerHTML += '<a data-toggle="exampleModal9"><img src="' + imageBaseUrl + 'w300' + response.results[i].poster_path + '" id = "' + response.results[i].id + '" onclick = "reveal(this.id)">';
 
 
 
-			//	document.getElementById('movie-grid').innerHTML = '<img src="'+imageBaseUrl + 'w300' + response.results[i].poster_path +'"';
 
-		//	console.log(response);
-			//console.log(response.results[i].overview);
-
-			//Youtube embed
-			// var settings = {
-			// 	//"url": apiBaseURL+apiTmdbkey,
-			// 	"url": "https://api.themoviedb.org/3/movie/" + response.results[i].id + "/videos?api_key=cf9588340d8a721412af021d7fc6ba6a",
-			// 	"method": "GET",
-			// }
-			// var count=0;
-			// console.log(response.results[i].id);
-			// $.ajax(settings).done(function (responses) {
-			// 	console.log(responses);
-			// 	console.log(responses.results[count].key);
-			// 	//console.log(response.key);
-			// 	//console.log('THIS IS' + responses.results.length);
-			// 	document.getElementById('movie-grid').innerHTML += '<iframe width="753" height="380" src="https://www.youtube.com/embed/' + responses.results[count].key + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-
-			// });
-			// count++;
 		}
 	});
-
 
 
 });
@@ -65,19 +39,114 @@ $(document).ready(function () {
 var clickedId;
 
 function reveal(clickedId) {
+
 	var settings = {
 		"url": "https://api.themoviedb.org/3/movie/" + clickedId + "?api_key=cf9588340d8a721412af021d7fc6ba6a",
 		"method": "GET",
 	}
-			var exampleModal9 = document.getElementById(clickedId).value;
+
 	$.ajax(settings).done(function (response) {
 		console.log(response);
 		//alert(response.overview);
-		document.innerHTML = '<div class="row"><div class="row"><div class="columns"><p><a data-toggle="'+exampleModal9+'">Click me for an overlay-lacking modal</a></p><div class="reveal" id="exampleModal9" data-reveal data-overlay="false"><h2 id="firstModalTitle">This is a modal.</h2><img src="'+ imageBaseUrl + 'w300' + response.poster_path +'">;<p><a href="#" data-reveal-id="secondModal" class="secondary button">Second Modal...</a></p><button class="close-button" data-close aria-label="Close reveal" type="button"><span aria-hidden="true">&times;</span></button></div></div></div></div><script>$(document).foundation();</script>';
-		//$('#movie-grid').html(a);
+		var overview = response.overview;
+		document.getElementById('exampleModal9').innerHTML = '<div class="row"> <div class="cell small-4 large-4 columns"><img src="' + imageBaseUrl + 'w300' + response.poster_path + '"><div class="cell small-4 large-4 columns">' + overview + '</div></div><button id =' + clickedId + ' class="close-button" data-close aria-label="Close reveal" type="button"><span aria-hidden="true">&times</span></button><a href="#" data-reveal-id="videoModal" id =' + clickedId + ' class="radius button" onclick = "youTubeReveal(this.id)">Watch Trailer&hellip;</a><input type = "text"><script>$(document).foundation();</script>';
+
 	});
-	//document.getElementById('display-movie').style.display = 'block';
 }
+//Playing the trailer
+function youTubeReveal(clickedId) {
+
+	var settings = {
+		"url": "https://api.themoviedb.org/3/movie/" + clickedId + "/videos?api_key=cf9588340d8a721412af021d7fc6ba6a",
+		"method": "GET",
+	}
+	var exampleModal8 = document.getElementById(clickedId).value;
+	$.ajax(settings).done(function (response) {
+		//console.log(response);
+		//alert(response.resultskey);
+		document.getElementById('exampleModal9').innerHTML = '<iframe width="553" height="280" src="https://www.youtube.com/embed/' + response.results[0].key + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><button id =' + clickedId + ' class="close-button" data-close aria-label="Close reveal" type="button"><span aria-hidden="true">&times</span></button>';
+
+
+
+	});
+}
+
+//Display the searched Movie
+
+$("#movieSearchBtn").on('click', function (event) {
+
+	var query = $("#searchMovie").val().trim();
+	event.preventDefault();
+	$("#movie-grid").empty();
+	var settings = {
+		"url": "https://api.themoviedb.org/3/search/movie?api_key=cf9588340d8a721412af021d7fc6ba6a&language=en-US&page=1&include_adult=false&query=" + query + '"',
+		"method": "GET"
+	}
+
+	$.ajax(settings).done(function (response) {
+		//console.log(response);
+		for (i = 0; i < response.results.length; i++) {
+
+			$("#movie-grid").append('<a data-toggle="exampleModal9"><img src="' + imageBaseUrl + 'w300' + response.results[i].poster_path + '" id = "' + response.results[i].id + '" onclick = "reveal(this.id)">');
+
+		}
+
+	});
+});
+//Genre
+$(".genre").on('click', function (event) {
+	event.preventDefault();
+	var genre = this.id;
+	$("#movie-grid").empty();
+	var settings = {
+
+		"url": "https://api.themoviedb.org/3/discover/movie?api_key=cf9588340d8a721412af021d7fc6ba6a&with_genres=" + genre,
+		"method": "GET"
+	}
+
+	$.ajax(settings).done(function (response) {
+		for (i = 0; i < response.results.length; i++) {
+
+			$("#movie-grid").append('<a data-toggle="exampleModal9"><img src="' + imageBaseUrl + 'w300' + response.results[i].poster_path + '" id = "' + response.results[i].id + '" onclick = "reveal(this.id)">');
+
+		}
+	});
+})
+
+//http://api.fandango.com/v1/?op=theatersbypostalcodesearch&postalcode=94105&apikey=&sig=7e56dd10e7d394376ac564563086c205a21071f5adda61c8e419a9cd3c2b53b3
+//Fandango
+// $("#zipCode").on('click', function (event) {
+// 	event.preventDefault();
+
+// 	console.log('Getting here');
+// 	var settings = {
+
+// 		"url": "http://data.tmsapi.com/v1.1/movies/showings?startDate=2018-11-07&zip=78501&api_key=gvfz63zjy3q4pk92hdhxeekg",
+// 		"method": "GET"
+// 	}
+
+// 	$.ajax(settings).then(function (response) {
+// 		console.log('Fandango:' +response);
+// 	});
+
+// var invocation = new XMLHttpRequest();
+// var url = 'https://crossorigin.me/http://data.tmsapi.com/v1.1/movies/showings?startDate=2018-11-07&zip=78501&api_key=gvfz63zjy3q4pk92hdhxeekg';
+    
+// function callOtherDomain(){
+//   if(invocation) {
+//     invocation.open('GET', url, true);
+//     invocation.withCredentials = true;
+//     invocation.onreadystatechange = function () {
+// 		console.log(invocation.responseText);
+// 	} ;
+//     invocation.send(); 
+//   }
+// }
+
+// })
+
+
+
 
 
 $(document).foundation();
