@@ -2,7 +2,6 @@ body {
     height: auto;
     background-color: #000;
     font-family: 'Cantarell', sans-serif;
-    color:white;
 }
 img{
     padding: 10px;
@@ -134,7 +133,7 @@ a:link, a:visited, a:hover, a:active, .dropdown.menu>li.is-active>a{
        border: 1px solid white;
        padding:5px;   
    }
-   
+
 footer {
     background: gray;
     padding: 20px;
