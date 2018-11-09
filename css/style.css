@@ -2,6 +2,33 @@ body {
     height: auto;
     background-color: #000;
     font-family: 'Cantarell', sans-serif;
+    color:white;
+}
+img{
+    padding: 10px;
+}
+
+input:invalid {
+    border: 2px dashed red;
+  }
+  
+  input:valid {
+    border: 2px solid black;
+  }
+
+#exampleModal9 img{
+    float:left;
+}
+
+#exampleModal9 .button{
+    margin-top:20px;
+    background-color:#ebebeb;
+    color:#333;
+    border-radius: 5px;
+}
+
+#exampleModal9 .overview{
+    padding-top:40px;
 }
 
 #display-movie
@@ -39,6 +66,75 @@ a:link, a:visited, a:hover, a:active, .dropdown.menu>li.is-active>a{
     border-radius: 5px; 
 }
 
+#panel {
+    display: block;
+    width: 90%;
+    height: auto;
+    background-color:black;
+  }
+  
+  
+  #zip{
+      width:30%;
+      padding-left:50px;
+      margin-top:50px;
+      margin-bottom:30px;
+  }
+  .tabs-title{
+          background-color: grey; 
+  }
+  .accordion {
+      background-color: #eee;
+      color: #444;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      transition: 0.4s;
+  }
+  
+  .active, .accordion:hover {
+      background-color: #ccc;
+  }
+  
+  .accordion:after {
+      content: '\002B';
+      color: #777;
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+  }
+  
+  .active:after {
+      content: "\2212";
+  }
+  
+  .panel {
+      padding: 0 18px;
+      background-color: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+  }
+  #movie-list{
+      color:white;
+  }
+  
+  table {
+       border-collapse: collapse;
+       width:70%;
+       margin:40px;
+       padding:5px;
+   }
+  
+   table, th, td {
+       border: 1px solid white;
+       padding:5px;   
+   }
+   
 footer {
     background: gray;
     padding: 20px;
