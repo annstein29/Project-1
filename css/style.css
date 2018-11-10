@@ -15,6 +15,7 @@ input:invalid {
     border: 2px solid black;
   }
 
+
 #exampleModal9 img{
     float:left;
 }
@@ -26,8 +27,13 @@ input:invalid {
     border-radius: 5px;
 }
 
+.youtubeOpen{
+    background-color:brown !important;
+    color:white  !important;
+}
+
 #exampleModal9 .overview{
-    padding-top:40px;
+    padding-top:15px;
 }
 
 #display-movie
