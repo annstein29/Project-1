@@ -8,9 +8,9 @@ $(document).ready(function () {
 
 	});
 
-	$("#datepicker").val( moment().format('YYYY-MM-DD') );
-        console.log(moment().format('MMM D, YYYY'));
-	// set a variable
+	$("#datepicker").val(moment().format('YYYY-MM-DD'));
+
+
 });
 
 
@@ -31,14 +31,10 @@ $(document).ready(function () {
 	}
 
 	$.ajax(settings).done(function (response) {
-			
+
 		for (i = 0; i < response.results.length; i++) {
 
 			document.getElementById('movie-grid').innerHTML += '<a data-toggle="exampleModal9"><img src="' + imageBaseUrl + 'w300' + response.results[i].poster_path + '" id = "' + response.results[i].id + '" onclick = "reveal(this.id)">';
-
-
-
-
 		}
 	});
 
@@ -57,7 +53,9 @@ function reveal(clickedId) {
 	$.ajax(settings).done(function (response) {
 		console.log(response);
 		var overview = response.overview;
-		document.getElementById('exampleModal9').innerHTML = '<div class="row"> <div class="cell small-4 large-4 columns"><img src="' + imageBaseUrl + 'w300' + response.poster_path + '"><div class="cell small-4 large-4 columns overview">' + overview + '</div></div><button id =' + clickedId + ' class="close-button" data-close aria-label="Close reveal" type="button"><span aria-hidden="true">&times</span></button><a href="#" data-reveal-id="videoModal" id =' + clickedId + ' class="radius button" onclick = "youTubeReveal(this.id)">Watch Trailer&hellip;</a><script>$(document).foundation();</script>';
+		var title = response.title;
+		var vote_average = response.vote_average;
+		document.getElementById('exampleModal9').innerHTML = '<div class="row"> <div class="cell small-4 large-4 columns"><img src="' + imageBaseUrl + 'w300' + response.poster_path + '" alt="#"><div class="cell small-4 large-4 columns overview"><b>Title:</b>' + title + '</div><div class="cell small-4 large-4 columns overview"><b>Overview:</b>' + overview + '</div><div class="cell small-4 large-4 columns overview"><b>Vote Score:</b>' + vote_average + '</div></div><button id =' + clickedId + ' class="close-button" data-close aria-label="Close reveal" type="button"><span aria-hidden="true">&times</span></button><a href="#" data-reveal-id="videoModal" id =' + clickedId + ' class="radius button youtubeOpen" onclick = "youTubeReveal(this.id)">Watch Trailer&hellip;</a><script>$(document).foundation();</script>';
 
 	});
 }
@@ -132,43 +130,42 @@ $("#zipCode").on('click', function (event) {
 	var settings = {
 		"async": true,
 		"crossDomain": true,
-		"url": "https://data.tmsapi.com/v1.1/movies/showings?startDate="+today+"&zip="+zipCode+"&api_key=gvfz63zjy3q4pk92hdhxeekg",
+		"url": "https://data.tmsapi.com/v1.1/movies/showings?startDate=" + today + "&zip=" + zipCode + "&api_key=gvfz63zjy3q4pk92hdhxeekg",
 		"method": "GET"
 	}
 
 	$.ajax(settings).done(function (response) {
 
-		
+
 		var options = '';
 		var options2 = '';
 		var options3;
 		var options4;
-		var tr='<tr>';
-		var tr2='</tr>';
-		var td='<td>';
+		var tr = '<tr>';
+		var tr2 = '</tr>';
+		var td = '<td>';
 		var td2 = '</td>';
 		var datetime;
 		for (i = 0; i < response.length; i++) {
-				options='<td>'+response[i].title+'</td>'; 
+			options = '<td>' + response[i].title + '</td>';
 
-				for (j=0;j<response[i].showtimes.length;j++)
-				{
-					datetime=response[i].showtimes[j].dateTime.substring(11)
+			for (j = 0; j < response[i].showtimes.length; j++) {
+				datetime = response[i].showtimes[j].dateTime.substring(11)
 
-					
-					options2+='<p>'+response[i].showtimes[j].theatre.name+'</p>';
-					options4+='<p>'+datetime+'</p>';
-				}
-				
-				options3=tr+options+td+options2+td2+td+options4+td2+tr2;
-				$("#movie-list").prepend(options3);
 
-				options2='';
-				options4='';
-						
-				
+				options2 += '<p>' + response[i].showtimes[j].theatre.name + '</p>';
+				options4 += '<p>' + datetime + '</p>';
+			}
+
+			options3 = tr + options + td + options2 + td2 + td + options4 + td2 + tr2;
+			$("#movie-list").prepend(options3);
+
+			options2 = '';
+			options4 = '';
+
+
 		}
-		
+
 	});
 
 
@@ -176,13 +173,11 @@ $("#zipCode").on('click', function (event) {
 
 //Form Validation
 function myFunction() {
-    var inpObj = document.getElementById("zipSearch");
-    if (!inpObj.checkValidity()) {
-        document.getElementById("demo").innerHTML = 'Please Enter a valid zip Code';
-    } else {
-        document.getElementById("demo").innerHTML = "Input OK";
-    } 
-} 
+	var inpObj = document.getElementById("zipSearch");
+	if (!inpObj.checkValidity()) {
+		document.getElementById("demo").innerHTML = '';
+	}
+}
 
 
 
@@ -215,7 +210,7 @@ function getCSS(element, property) {
 
 	} else if (window.getComputedStyle) {
 		css = document.defaultView.getComputedStyle(elem, null).
-		getPropertyValue(property);
+			getPropertyValue(property);
 	}
 
 	return css;
